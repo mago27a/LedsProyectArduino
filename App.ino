@@ -1,27 +1,47 @@
-const int ledPin[] = {2, 3, 4, 5, 6, 7, 8, 9, 10};
-const int seriesLed[10][] = {
-    {2, 3, 4, 5, 6, 7, 8, 9, 10},
-    {3, 5, 7, 9},
-    {2, 4, 6, 8, 10},
-    {}}
+/*
+led1=2; led2=3...led9=10;
+*/
 
-void
-setup()
+int seriesLed[3][9] = {
+    {2, 3, 4, 5, 6, 7, 8, 9, 10},
+    {3, 5, 7, 9, 0, 0, 0, 0, 0},
+    {2, 4, 6, 8, 10, 0, 0, 0, 0},
+    {2, 4, 10, 8, 7, 0, 0, 0, 0},
+    {2, 8, 7, 3, 10, 7, 9, 4, 6},
+};
+
+void setup()
 {
-    for (int i = 0; i < sizeof(seriesLed); i++)
-    {
-        for (int j = 0; j < sizeof(seriesLed[i]); j++)
-        {
-        }
-    }
+    setMatrizToOutput(seriesLed);
 }
 
 void loop()
 {
-    pinMode(ledPin, OUTPUT);
+
+    illunimateSerieLed();
 }
 
 /*Metodos*/
+
+/*iniciar serie loop*/
+/*reiniciar serie*/
+/*pasar al asiguiente serie */
+/*retroceder serie*/
+/*deterner apagar*/
+
+/*setMatrizSeries*/
+void setMatrizToOutput(int arr[5][9])
+{
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            int value = arr[i][j];
+            pinMode(value, OUTPUT);
+        }
+    }
+}
+
 int obtener_valor_aleatorio()
 {
     int indice = random(9);
@@ -38,8 +58,23 @@ void serie1()
         // delay(500);
         // digitalWrite(ledPin[i], LOW);
         // delay(500);
-        onLed(i,500);
-        offLed(i,500);
+
+        onLed(i, 500);
+        offLed(i, 500);
+    }
+}
+
+void illunimateSerieLed(int arr[][9])
+{
+    int pin;
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 9; i++)
+        {
+            pin = arr[i][j];
+            onLed(pin, 1000);
+            offLed(pin, 1000);
+        }
     }
 }
 
@@ -55,13 +90,17 @@ void serie1()
 //     }
 // }
 
-void onLed(int indice, int msTime)
+void onLed(int pin, int msTime)
 {
-    digitalWrite(ledPin[indice], HIGH);
+    if (pin == 0)
+        return;
+    digitalWrite(pin, HIGH);
     delay(msTime);
 }
-void offLed(int indice, int msTime)
+void offLed(int pin, int msTime)
 {
-    digitalWrite(ledPin[indice], LOW);
+    if (pin == 0)
+        return;
+    digitalWrite(pin, LOW);
     delay(msTime);
 }
