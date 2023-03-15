@@ -43,7 +43,7 @@ void setMatrizToOutput(int arr[5][9])
     }
 }
 
-
+/*
 void illunimateSerieLed(int arr[][9])
 {
     int pin;
@@ -57,6 +57,24 @@ void illunimateSerieLed(int arr[][9])
         }
     }
 }
+*/
+
+void illunimateSerieLed(int arr[][9])
+{
+    int pin;
+    int i=0;
+    
+        for (int j = 0; j < 9; j++)
+        {
+            pin = arr[i][j];
+            onLed(pin, 1000);
+            offLed(pin, 1000);
+        }
+    
+}
+
+
+
 
 // void serieRandom()
 // {
