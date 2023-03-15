@@ -14,6 +14,7 @@ int seriesLed[5][9] = {
 };
 
 int speedsDelay[] = {300, 600, 900, 1200, 1500, 1800, 2100, 2400};
+/*currentSerie*/
 
 void setup()
 {
@@ -65,7 +66,7 @@ void illunimateSerieLed(int arr[][9])
 
 void illunimateSerieLed(int arr[][9])
 {
-    int longArr = sizeof(arr);
+    int longArr = sizeof(arr)/sizeof(int);
     int pin;
     int i = 0;
     // Si se presiona el botón, avanzamos al siguiente valor del arreglo
