@@ -85,6 +85,7 @@ void illunimateSerieLed(int arr[][9])
         onLed(pin, 1000);
         offLed(pin, 1000);
     }
+    delay(100);
 }
 
 // void serieRandom()
