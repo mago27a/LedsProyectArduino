@@ -2,6 +2,9 @@
 led1=2; led2=3...led9=10;
 */
 
+/*btn1es*/
+int btn1 = 12;
+
 int seriesLed[5][9] = {
     {2, 3, 4, 5, 6, 7, 8, 9, 10},
     {3, 5, 7, 9, 0, 0, 0, 0, 0},
@@ -14,12 +17,13 @@ int speedsDelay[] = {300, 600, 900, 1200, 1500, 1800, 2100, 2400};
 
 void setup()
 {
+    pinMode(btn1, INPUT);
     setMatrizToOutput(seriesLed);
 }
 
 void loop()
 {
-  illunimateSerieLed(seriesLed);
+    illunimateSerieLed(seriesLed);
 }
 
 /*Metodos*/
@@ -61,20 +65,27 @@ void illunimateSerieLed(int arr[][9])
 
 void illunimateSerieLed(int arr[][9])
 {
+    int longArr = sizeof(arr);
     int pin;
-    int i=0;
-    
-        for (int j = 0; j < 9; j++)
+    int i = 0;
+    // Si se presiona el botón, avanzamos al siguiente valor del arreglo
+    if (digitalRead(btn1) == HIGH)
+    {
+        i++;
+
+        if (i >= longArr)
         {
-            pin = arr[i][j];
-            onLed(pin, 1000);
-            offLed(pin, 1000);
+            i = 0;
         }
-    
+    }
+
+    for (int j = 0; j < 9; j++)
+    {
+        pin = arr[i][j];
+        onLed(pin, 1000);
+        offLed(pin, 1000);
+    }
 }
-
-
-
 
 // void serieRandom()
 // {
@@ -106,9 +117,8 @@ void offLed(int pin, int msTime)
 int velocityDelayLeds(int arr[])
 {
     int longArr = sizeof(arr);
-    int index=0;
-    int currentValue=arr[index];  
+    int index = 0;
+    int currentValue = arr[index];
 
     return currentValue;
-     
 }
